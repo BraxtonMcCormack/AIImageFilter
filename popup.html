@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Image Filter</title>
+</head>
+<body>
+  <h3>AI Image Filter</h3>
+  <button id="toggleFilter">Toggle Filter</button>
+  <script>
+    document.getElementById('toggleFilter').addEventListener('click', () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "toggleFilter" }, (response) => {
+          alert(`Filtering is now ${response.filteringEnabled ? 'enabled' : 'disabled'}`);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
